@@ -24,11 +24,10 @@ module.exports.FindAStock = (req, res) => {
 module.exports.GetMarketNews = (req, res) => {
     let options = {
         method: 'GET',
-        url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/news/v2/get-details',
-        params: {uuid: '9803606d-a324-3864-83a8-2bd621e6ccbd', region: 'US'},
+        url: 'https://seeking-alpha.p.rapidapi.com/news/list-trending',
         headers: {
             'x-rapidapi-key': `${process.env.SECRET_API_KEY}`,
-            'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+            'x-rapidapi-host': 'seeking-alpha.p.rapidapi.com'
         }
     };
     axios.request(options)

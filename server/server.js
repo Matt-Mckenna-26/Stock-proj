@@ -5,6 +5,7 @@ const dotenv = require("dotenv")
 
 dotenv.config();
 
+
 // This will fire our mongoose.connect statement to initialize our database connection
 require("./config/mongoose.config");
 
