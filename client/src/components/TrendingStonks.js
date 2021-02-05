@@ -13,7 +13,7 @@ const TrendingStonks = () => {
         .catch(err => console.log({err}))
     }, []);
     return (
-        <div className='m-4 p-4 border border-black'>
+        <div className='m-4 p-4 border border-black' id='trending'>
             <h2 className='m-4  p-4'> Trending at this Moment</h2>
             {trendingStonks.map((stonk, idx) => {
                 return stonk.regularMarketChangePercent > 0 ?
@@ -21,7 +21,7 @@ const TrendingStonks = () => {
                     bg='success'
                     key={idx}
                     text='light'
-                    style={{ width: '16rem', height:'18rem', display:'inline-block' }}
+                    style={{ width: '18rem', height:'18rem', display:'inline-block' }}
                     className="m-1 list-group-item align-top"
                 >
                     <Card.Header>{stonk.symbol}</Card.Header>
@@ -42,7 +42,7 @@ const TrendingStonks = () => {
                     bg='danger'
                     key={idx}
                     text='light'
-                    style={{ width: '16rem', height:'18rem', display:'inline-block' }}
+                    style={{ width: '18rem', height:'18rem', display:'inline-block' }}
                     className="m-1 list-group-item align-top"
                 >
                     <Card.Header>{stonk.symbol}</Card.Header>

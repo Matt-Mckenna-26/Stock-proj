@@ -24,10 +24,10 @@ module.exports.FindAStock = (req, res) => {
 module.exports.GetMarketNews = (req, res) => {
     let options = {
         method: 'GET',
-        url: 'https://seeking-alpha.p.rapidapi.com/news/list-trending',
+        url: 'https://cnbc.p.rapidapi.com/news/list-trending',
         headers: {
             'x-rapidapi-key': `${process.env.SECRET_API_KEY}`,
-            'x-rapidapi-host': 'seeking-alpha.p.rapidapi.com'
+            'x-rapidapi-host': 'cnbc.p.rapidapi.com'
         }
     };
     axios.request(options)
@@ -40,13 +40,12 @@ module.exports.GetMarketNews = (req, res) => {
 }
 
 module.exports.GetMarketSummary = (req, res) => {
-    var options = {
+    let options = {
         method: 'GET',
-        url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-summary',
-        params: {region: 'US'},
+        url: 'https://morning-star.p.rapidapi.com/market/get-summary',
         headers: {
             'x-rapidapi-key': `${process.env.SECRET_API_KEY}`,
-            'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+            'x-rapidapi-host': 'morning-star.p.rapidapi.com'
         }
     };
     axios.request(options)
