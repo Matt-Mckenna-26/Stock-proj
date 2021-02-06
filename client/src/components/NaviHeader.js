@@ -13,7 +13,7 @@ import {navigate} from '@reach/router'
 const NaviHeader = ({ticker, setTicker, handleSubmit}) => {
 
     return (
-        <Navbar className='sticky-top w-100' bg="white" expand="lg">
+        <Navbar className='sticky-top w-100 border border-bottom-black' bg="white" expand="lg">
             <Navbar.Brand href="#home">
                 <img src={Logo}
                 width ='115rem'
@@ -31,7 +31,7 @@ const NaviHeader = ({ticker, setTicker, handleSubmit}) => {
                 </Nav>
                 <Form inline className='align-right bg-light navbar-link-font'>
                     <FormLabel className='px-2'>Search for a ticker here:</FormLabel>
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={(e)=> setTicker(e.target.value)} />
+                    <FormControl type="text" placeholder="Search" className="mr-sm-2" defaultValue={ticker} onChange={(e)=> setTicker(e.target.value)} />
                     <Button  onClick = {handleSubmit} variant="outline-success m-1">Search</Button>
                 </Form>
             </Navbar.Collapse>

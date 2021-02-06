@@ -10,9 +10,10 @@ import MajorIndicesCaro from './components/MajorIndicesCaro';
 import StockDetail from './components/StockDetail';
 
 const App = () => {
-  const [ticker, setTicker] = useState({});
+  const [ticker, setTicker] = useState('By ticker ex."tsla =tesla"');
   const [searched, setSearched] = useState(false);
   const [detailedStock, setDetailedStock] = useState({});
+  const [detailedStockLoaded, setDetailedStockLoaded ] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,13 +23,15 @@ const App = () => {
       setDetailedStock(res.data)
     }).catch(err => console.log({err}))
     setSearched(true)
+    setDetailedStockLoaded(true);
 }
 
   return (
     <div className="App">
         <NaviHeader ticker={ticker}  setTicker={setTicker} handleSubmit={handleSubmit} setSearch={setSearched}/>
-        <StockDetail searched={searched} detailedStock={detailedStock} setDetailedStock={setDetailedStock}/>
         <JumboTron searched={searched}/>
+        <StockDetail searched={searched} detailedStock={detailedStock} setDetailedStock={setDetailedStock} 
+        handleSubmit={handleSubmit} setTicker={setTicker} ticker={ticker}/>
         <MajorIndicesCaro/>
         <NewsCarousel />
         <TrendingStonks/>
