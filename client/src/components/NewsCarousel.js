@@ -18,25 +18,28 @@ const NewsCarousel = () => {
     }, []);
 
     return(
-    <div className='m-2' id='news'>
-        <h2 className='p-2 section-header'>Headlines</h2>
+    <div className='p-2 blue-bg' id='news'>
+        <h2 className='p-2 section-header text-white'>Headlines</h2>
         {loaded !== false ? 
-            (<Carousel className = 'my-3 row py-3 border border-black'>
+            (<Carousel className = 'py-3 row '>
                 {
                 stories.map((story,idx) => (
                     <Carousel.Item interval={4700} key={idx}>
-                        <div className='d-block w-100 border border-black'>
+                        <div className='d-block w-100 '>
                             {story.featuredMedia === null ? null :
                             <img src={`${story.featuredMedia.url}`} style ={{height:'9rem'}}alt='Story Image'/>}
-                            <h4 className='text-primary m-3 p-3'>{story.shorterHeadline}</h4>    
+                            <h4 className='text-light p-3'>{story.shorterHeadline}</h4>    
                             <a className='m-1' href={`${story.url}`} target='blank'>
-                                <Button variant='outline-primary'>Visit story</Button>
+                                <Button variant='light' className='text-primary m-5'>Visit story</Button>
                                 </a>
-                                <p className='text-primary p-3'>Click left and right of screen to cycle through headlines</p>
                         </div>
                     </Carousel.Item>
                 ))}
-            </Carousel>) : <Spinner animation="border" variant="primary" size='xl'/> 
+            </Carousel>) : 
+            <>
+            <h2 className='text-light'>Loading...</h2>
+            <Spinner animation="border" variant="light" size='xl'/> 
+            </>
         }
     </div>
     )

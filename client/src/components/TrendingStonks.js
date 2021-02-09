@@ -2,10 +2,30 @@ import React, {useState, useEffect} from 'react';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import Spinner from 'react-bootstrap/Spinner'
+import Button from 'react-bootstrap/Button'
 
 const TrendingStonks = () => {
     const [trendingStonks, setTrendingStonks] = useState([]);
     const [loaded, setLoaded] = useState(false);
+    const [priceSorted, setPriceSorted] = useState(false);
+    const [percentSorted, setPercentSorted] = useState(false);
+
+    const sortByPercent = (e) => {
+        setLoaded(false);
+        setPriceSorted(false);
+        trendingStonks.sort(function (a,b) {
+            return b.regularMarketChangePercent - a.regularMarketChangePercent;
+        })
+        setPercentSorted(true);
+    }
+    const sortByDollar = () => {
+        setLoaded(false);
+        setPercentSorted(false);
+        trendingStonks.sort(function (a,b) {
+            return b.regularMarketChange - a.regularMarketChange;
+        })
+        setPriceSorted(true);
+    }
 
     useEffect(()=> {
         axios.get('http://localhost:8000/api/trending/tickers')
@@ -15,10 +35,15 @@ const TrendingStonks = () => {
             })
         .catch(err => console.log({err}))
     }, []);
+
     return (
-        <div className='m-4 p-4 border border-black' id='trending'>
-            <h2 className='m-4  p-4'> Trending at this Moment</h2>
-            {loaded === true ?
+        <div className='p-3 border rounded-lg border-black bg-light col-10 mx-auto' id='trending'>
+            <h2 className='p-3 text-primary'> Trending at this Moment</h2>
+            <div>
+                <Button onClick ={(e) => sortByPercent(e)} variant='outline-primary m-2'>Sort by largest % Change</Button>
+                <Button onClick ={sortByDollar} variant='outline-primary m-2'>Sort by largest $ Change</Button>
+            </div>
+            {loaded === true  || priceSorted === true || percentSorted === true ?
                 (<>
                     {trendingStonks.map((stonk, idx) => {
                     return stonk.regularMarketChangePercent > 0 ?
@@ -29,15 +54,15 @@ const TrendingStonks = () => {
                         style={{ width: '18rem', height:'18rem', display:'inline-block' }}
                         className="m-1 list-group-item align-top"
                     >
-                        <Card.Header>{stonk.symbol}</Card.Header>
+                        <Card.Header className='font-weight-bold'>{stonk.symbol}</Card.Header>
                             <Card.Body>
-                                <Card.Title>{stonk.shortName}</Card.Title>
+                                <Card.Title className='font-weight-bold'>{stonk.shortName}</Card.Title>
                                 <Card.Text>
                                     <ul className='list-unstyled'>
-                                        <li>Price: ${stonk.regularMarketPrice}</li>
-                                        <li>$ Change: ${stonk.regularMarketChange}</li>
-                                        <li>% Change: + {stonk.regularMarketChangePercent}%</li>
-                                        <li>Previous Close: ${stonk.regularMarketPreviousClose}</li>
+                                        <li><span className='font-weight-bold'>Price:</span> ${stonk.regularMarketPrice}</li>
+                                        <li><span className='font-weight-bold'>$ Change:</span> ${stonk.regularMarketChange}</li>
+                                        <li><span className='font-weight-bold'>% Change:</span> + {stonk.regularMarketChangePercent}%</li>
+                                        <li><span className='font-weight-bold'>Previous Close:</span> ${stonk.regularMarketPreviousClose}</li>
                                     </ul>
                                 </Card.Text>
                         </Card.Body>
@@ -50,18 +75,23 @@ const TrendingStonks = () => {
                         style={{ width: '18rem', height:'18rem', display:'inline-block' }}
                         className="m-1 list-group-item align-top"
                     >
-                        <Card.Header>{stonk.symbol}</Card.Header>
+                        <Card.Header className='font-weight-bold'>{stonk.symbol}</Card.Header>
                             <Card.Body>
-                                <Card.Title>{stonk.shortName}</Card.Title>
+                                <Card.Title className='font-weight-bold'>{stonk.shortName}</Card.Title>
                                 <ul className='list-unstyled'>
-                                        <li>Price: ${stonk.regularMarketPrice}</li>
-                                        <li>$ Change: ${stonk.regularMarketChange}</li>
-                                        <li>% Change: {stonk.regularMarketChangePercent}%</li>
-                                        <li>Previous Close: ${stonk.regularMarketPreviousClose}</li>
+                                <li><span className='font-weight-bold'>Price:</span> ${stonk.regularMarketPrice}</li>
+                                        <li><span className='font-weight-bold'>$ Change:</span> ${stonk.regularMarketChange}</li>
+                                        <li><span className='font-weight-bold'>% Change:</span>  {stonk.regularMarketChangePercent}%</li>
+                                        <li><span className='font-weight-bold'>Previous Close:</span> ${stonk.regularMarketPreviousClose}</li>
                                     </ul>
                             </Card.Body>
                     </Card>
-                })}</>): <Spinner animation="border" variant="primary" size='xl'/> }
+                })}</>): 
+                    <>
+                        <h2 className='text-primary'>Loading...</h2>
+                        <Spinner animation="border" variant="primary" size='xl'/>
+                    </>
+                }
         </div>
     )
 }

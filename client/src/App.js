@@ -27,7 +27,7 @@ const App = () => {
 }
 
   return (
-    <div className="App">
+    <div className="App pb-5">
         <NaviHeader ticker={ticker}  setTicker={setTicker} handleSubmit={handleSubmit} setSearch={setSearched}/>
         <JumboTron searched={searched}/>
         <StockDetail searched={searched} detailedStock={detailedStock} setDetailedStock={setDetailedStock} 

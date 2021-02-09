@@ -7,10 +7,11 @@ const JumboTron = ({searched}) => {
     return (
         <>
         {searched === true? null :
-            <Jumbotron className ='d-block w-100'id='home'>
-            <h1 className='mb-3 jumbo-header-font'>Welcome to MoonViews!</h1>
+    <Jumbotron className ='d-block w-90 mx-auto blue-bg' 
+    style={{backgroundColor: '#659DBD', marginBottom: '0rem'}} id='home'>
+            <h2 className='mb-3 jumbo-header-font text-light'>Welcome to MoonViews</h2>
             <img src={Logo} alt ='MoonViews Logo' className='d-inline-block my-2' style={{height:'7rem'}}/>
-            <p>
+            <p className='text-light border border-light rounded-circle p-5'>
                 MoonViews is dedicated to providing insights into the market.
                 <br/>
                 Get data such as the overall market summary, trending movers, and news from CNBC.
@@ -20,7 +21,7 @@ const JumboTron = ({searched}) => {
                 What stocks are your ticket to the moon?
             </p>
             <p>
-                <Button variant="outline-primary" className=' btn-md mt-2'><a href='#trending'>Explore trending stocks</a></Button>
+                <Button variant="light" className=' btn-md mt-2'><a href='#trending'className='text-primary text-decoration-none'>Explore trending stocks</a></Button>
             </p>
     </Jumbotron>}
     </>

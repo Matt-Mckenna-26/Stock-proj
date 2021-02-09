@@ -18,17 +18,17 @@ const MajorIndicesCaro = () => {
     }, []);
 
     return(
-    <div className='m-2' id='summary'>
-        <h2 className='p-2 section-header'>Market Summary</h2>
+    <div className=' blue-bg p-2' id='summary'>
+        <h2 className='p-2 section-header text-light'>Market Summary</h2>
     {loaded !== false ? 
-        (<Carousel className = 'my-3 row py-3 border border-black'>
+        (<Carousel className = 'my-3 row py-3'>
             {
             indices.map((index,idx) => ( 
-                <Carousel.Item interval={4700} key={idx} className='border border-black'>
-                    <div className='d-block w-100 text-primary'>
-                        <h3 className='text-primary m-3 p-3'>{index.Name}</h3>    
-                        <ul className='list-unstyled'>
-                            <h5 className='text-primary'>{index.ExchangeShortName}</h5>
+                <Carousel.Item interval={4700} key={idx} className='p-2'>
+                    <div className='d-block w-100 text-light'>
+                        <h3 className='text-light m-3 p-3'>{index.Name}</h3>    
+                        <ul className='list-unstyled p-2 font-weight-bold'>
+                            <h5 className='text-light'>{index.ExchangeShortName}</h5>
                             <li>Current Price: {index.Price}</li>
                             {index.PriceChange >0 ? 
                                 <>
@@ -44,11 +44,14 @@ const MajorIndicesCaro = () => {
                             <li>Open: {index.OpenPrice}</li>
                             <li>Yesterdays Close: {index.YesterdayPrice}</li>
                         </ul>
-                        <p className='text-primary'>Click left and right of screen to cycle through major indices</p>
                     </div>
                 </Carousel.Item>
             ))}
-        </Carousel>) : <Spinner animation="border" variant="primary" size='xl'/> 
+        </Carousel>) : 
+        <>
+        <h2 className='text-light'> Loading...</h2>
+        <Spinner animation="border" variant="light" size='xl'/> 
+        </>
         }
     </div>
     )

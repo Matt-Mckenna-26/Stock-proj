@@ -10,25 +10,25 @@ const StockDetail = ({detailedStock, setDetailedStock, searched, detailedStockLo
     return(
         /// first condition will check if stock has been serached either on navbar or in this elmement, if serached
         /// the jumbo and form will be replaced with a spinner until the detailedstock data is loaded.
-        <div id='search'>
+        <div id='search' className='blue-bg'>
             {searched === false ?
             <div>
-                <h2 className='m-3'>Look up in depth statistics of your favorite stocks!</h2>  
-                <Form inline-block className='align-right bg-light navbar-link-font m-5'>
-                    <FormLabel className='px-2'>Enter ticker here:</FormLabel>
-                    <FormControl type="text" placeholder="Search" className="col-8 mx-auto" 
-                    defaultValue={ticker} onChange={(e)=> setTicker(e.target.value)} />
-                    <Button  onClick = {handleSubmit} variant="outline-success m-1">Search</Button>
+                <h2 className='p-3 mt-2 text-light'>Look up in depth statistics of your favorite stocks.</h2>  
+                <Form inline-block className='align-right navbar-link-font p-5'>
+                    <FormLabel className='px-2 text-light font-weight-bold'>Enter ticker here:</FormLabel>
+                    <FormControl type="text" placeholder="Search" className="col-lg-8 col-sm-10 mx-auto my-3" 
+                    defaultValue={ticker} onChange={(e)=> setTicker(e.target.value)} onClick={(e)=> e.target.value =""} />
+                    <Button  onClick = {handleSubmit} variant="light" className='m-3 text-primary'>Search</Button>
                 </Form>
             </div> :
                     <>{searched === true && detailedStock.symbol !== undefined ? 
-                            (<Card className="text-center mx-auto" style={{width:'85%'}}>
+                            (<Card className="text-center mx-auto py-2 my-4" style={{width:'85%'}}>
                             <Card.Header>
                                 <h3>{detailedStock.price.shortName}</h3>
                                 <a className= 'mt-3' href={`${detailedStock.summaryProfile.website}`} target='blank'>Website</a>
-                                <p><span className='font-weight-bold d-inline-block mb-0'>Industry: </span>  {detailedStock.summaryProfile.industry}</p>
-                                <p><span className='font-weight-bold d-inline-block mb-0'>Symbol: </span>  {detailedStock.price.symbol}</p>
-                                <p><span className='font-weight-bold d-inline-block mb-0'>Exchange: </span>  {detailedStock.price.exchangeName}</p>
+                                <p><span className='font-weight-bold d-inline-block text-dark mb-0'>Industry: </span>  {detailedStock.summaryProfile.industry}</p>
+                                <p><span className='font-weight-bold d-inline-block text-dark mb-0'>Symbol: </span>  {detailedStock.price.symbol}</p>
+                                <p><span className='font-weight-bold d-inline-block  text-dark mb-0'>Exchange: </span>  {detailedStock.price.exchangeName}</p>
                             </Card.Header>
                             <Card.Body>
                                 <Card.Title>About {detailedStock.price.shortName}</Card.Title>
@@ -65,9 +65,9 @@ const StockDetail = ({detailedStock, setDetailedStock, searched, detailedStockLo
                                     </Card.Text>
                             </Card.Body>
                         </Card>) :
-                            <div className='m-5'>
-                                <h2>Loading...</h2>
-                                <Spinner animation="border" variant="primary" size='xl'/> 
+                            <div className='p-5'>
+                                <h2 className='text-light'>Loading...</h2>
+                                <Spinner animation="border" variant="light" size='xl'/> 
                             </div>
                     } 
                     </>
