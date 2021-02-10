@@ -6,35 +6,37 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import FormLabel from 'react-bootstrap/esm/FormLabel';
 import Logo from '../images/MoonViewsLogo.png';
-import {navigate} from '@reach/router'
+import {Link, navigate} from '@reach/router'
 
 
 
 const NaviHeader = ({ticker, setTicker, handleSubmit}) => {
 
-    const blank = '';
-
     return (
         <Navbar className='sticky-top w-100 border border-bottom-black' bg="white" expand="lg">
             <Navbar.Brand href="#home">
-                <img src={Logo}
-                width ='75rem'
-                className='d-inline-block align-top mt-1 pt-1'
-                />
+                <Link to='/'>
+                    <img src={Logo}
+                    width ='75rem'
+                    className='d-inline-block align-top mt-1 pt-1'
+                    />
+                </Link>
                 <h5 className='mt-.5'>MoonViews</h5>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="bg-white mr-auto navbar-link-font">
-                <Nav.Link href="#news" className='text-primary'>News</Nav.Link>
-                <Nav.Link href="#summary" className='text-primary'>Summary</Nav.Link>
-                <Nav.Link href="#trending" className='text-primary'>Trending</Nav.Link>
-                <Nav.Link href="#search" className='text-primary'>Search</Nav.Link>
-                </Nav>
+                <Nav.Link href="/#news" className='text-primary'>News</Nav.Link>
+                <Nav.Link href="/#summary" className='text-primary'>Summary</Nav.Link>
+                <Nav.Link href="/#trending" className='text-primary'>Trending</Nav.Link>
+                <Nav.Link href="/#search" className='text-primary'>Search</Nav.Link>
+                <Nav.Link href='/login' className='text-primary'>Login</Nav.Link>
+                <Nav.Link href='/register' className='text-primary'>Register</Nav.Link>
+            </Nav>
                 <Form inline className='align-right bg-white navbar-link-font'>
-                    <FormLabel className='px-2 text-primary'>Search for a ticker here:</FormLabel>
+                    <FormLabel className='px-2 text-primary'>Search:</FormLabel>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" defaultValue={ticker} onClick={(e)=> e.target.value =""} onChange={(e)=> setTicker(e.target.value)} />
-                    <Button  onClick = {handleSubmit} variant="outline-primary m-1">Search</Button>
+                    <Button onClick = {handleSubmit} variant="outline-primary m-1">Search</Button>
                 </Form>
             </Navbar.Collapse>
         </Navbar>

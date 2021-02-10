@@ -2,11 +2,13 @@
 .App {
   text-align: center;
   background-color: #659DBD;
+  background-size: cover;
 }
 
 html, body
-{ font-size: calc(.46em + .86vw) ;
+{ font-size: calc(.42em + .45vw) ;
 }
+
 
 .App-logo {
   height: 40vmin;

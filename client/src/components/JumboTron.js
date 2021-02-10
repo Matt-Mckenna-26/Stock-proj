@@ -2,6 +2,7 @@ import react from 'react';
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Button from 'react-bootstrap/Button'
 import Logo from '../images/MoonViewsLogo.png'
+import {Link} from '@reach/router'
 
 const JumboTron = ({searched}) => {
     return (
@@ -18,10 +19,13 @@ const JumboTron = ({searched}) => {
                 <br/>
                 Want to dive deep into a specific asset/security? No problem, search above or click on the ticker for more info.
                 <br/>
+                Be sure to register below so you can pin stocks to your own personalized watchlist! 
+                <br/>
                 What stocks are your ticket to the moon?
             </p>
             <p>
-                <Button variant="light" className=' btn-md mt-2'><a href='#trending'className='text-primary text-decoration-none'>Explore trending stocks</a></Button>
+                <Button variant="light" className=' btn-md m-2'><a href='#trending'className='text-primary text-decoration-none'>Explore trending stocks</a></Button>
+                <Button variant="light" className=' btn-md m-2'><Link to='/register'className='text-primary text-decoration-none'>Register to create your own watchlist</Link></Button>
             </p>
     </Jumbotron>}
     </>

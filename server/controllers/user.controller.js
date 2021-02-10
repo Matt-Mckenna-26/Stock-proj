@@ -1,4 +1,92 @@
 const User = require("../models/user.model");
+const bcrypt = require('bcrypt');
+const jwt = require("jsonwebtoken");
+
+//non authenicated controller
+
+module.exports.register = (req, res) => {
+  const user = new User(req.body);
+  user
+  .save()
+  .then(()=> {
+    res.json({msg: "success" , user: user});
+  })
+  .catch(err => res.status(400).json(err));
+}
+
+//Controller to log in user
+
+module.exports.login = (req, res) => {
+  User.findOne({email: req.body.email})
+    .then(user => {
+      if (user === null) {
+        res.status(400).json({msg : "Invalid login attempt"})
+      } else {
+        bcrypt
+          .compare(req.body.password, user.password)
+          .then(passwordIsValid => {
+            if (passwordIsValid) {
+              res. 
+              cookie(
+                'usertoken',
+                jwt.sign({_id: user._id}, process.env.JWT_SECRET),
+                {
+                  httpOnly: true
+                }
+              )
+              .json({msg: "success!"});
+            } else {
+              res.status(400).json({msg: "Invalid login attempt"})
+            }
+          })
+          .catch( err => 
+            res.status(400).json({msg : "Invalid login attempt"})
+          );
+      }
+    })
+    .catch(err => res.json(err));
+}
+
+//controller to get the currently logged in user
+
+module.exports.getLoggedInUser = (req, res) => {
+  const decodedJWT = jwt.decode(req.cookies.usertoken, {complete: true });
+  User.findById(decodedJWT.payload._id)
+    .then(user => res.json(user))
+    .catch(err => res.status(400).json(err));
+}
+
+module.exports.updateUserWatchList = (req, res) => {
+  let userId =  req.params.userId
+  User.findOne({ _id: userId })
+  .then(user => {
+    if (user){
+      user.tickersTracked.push(req.body);
+      user.save({validateModifiedOnly: true});
+      res.send(user)
+    }else{
+      res.status(400).send({err: "user not found"})
+  }})
+  .catch(err => {
+    res.status(400).send({err: "user not found"})
+  })
+};
+
+//two methods for logging out a user included 
+
+module.exports.LogOut = (req, res) => {
+  res
+  .cookie("usertoken", jwt.sign({_id:""}, process.env.JWT_SECRET), {
+    httpOnly: true,
+    maxAge: 0
+  })
+  .json({msg: "ok"});
+}
+
+module.exports.LogOut2 = (req, res) => {
+  res.clearCookie("usertoken");
+  res.json({ msg: "ok"})
+}
 
 module.exports.findAllUsers = (req, res) => {
   User.find()

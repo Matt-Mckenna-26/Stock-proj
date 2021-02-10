@@ -41,7 +41,7 @@ const StockDetail = ({detailedStock, setDetailedStock, searched, detailedStockLo
                                             <ul className='list-unstyled'>
                                                 <li><span className='font-weight-bold'>Current Price:</span> ${detailedStock.price.regularMarketPrice.fmt}</li>
                                                 <li><span className='font-weight-bold'>Price Change:</span> ${detailedStock.price.regularMarketChange.fmt}</li>
-                                                <li><span className='font-weight-bold'>% Change:</span> {detailedStock.price.regularMarketChangePercent.fmt}%</li>
+                                                <li><span className='font-weight-bold'>% Change:</span> {detailedStock.price.regularMarketChangePercent.fmt}</li>
                                                 <li><span className='font-weight-bold'>Market Open:</span> ${detailedStock.price.regularMarketOpen.fmt}</li>
                                                 <li><span className='font-weight-bold'>Previous Close:</span> ${detailedStock.price.regularMarketPreviousClose.fmt}</li>
                                             </ul>
