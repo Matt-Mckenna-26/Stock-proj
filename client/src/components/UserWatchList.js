@@ -5,16 +5,21 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Badge from 'react-bootstrap/Badge';
 import axios from 'axios';
+import Logo from '../images/MoonViewsLogo.png'
+import Spinner from 'react-bootstrap/Spinner'
 
 const UserWatchList = ({loggedInUser}) => {
     const [focusStockStats, setFocusStockStats] = useState([]);
     const [loaded, setLoaded] = useState(false)
+    const [focus, setFocused] = useState(false)
 
     const handleGetRequest = (thisTicker) => {
+        setFocused(true);
         axios.get(`http://localhost:8000/api/stock/${thisTicker}`)
             .then(res => { 
                 console.log(res.data);
                 setFocusStockStats(res.data);
+                setLoaded(true);
             })
             .catch(err => console.log({err}))
     }
@@ -27,11 +32,33 @@ const UserWatchList = ({loggedInUser}) => {
             </Badge>
             <ButtonGroup>
                     {loggedInUser.tickersTracked.map((tickers, idx) => (
-                        <Button variant="light" className='text-primary btn-lg border border-dark px-5' onClick={(e) => handleGetRequest(tickers.ticker)}>{tickers.ticker}</Button>
+                        <Button variant="light" className='text-primary btn-lg border border-dark px-5' 
+                        key ={idx} onClick={(e) => handleGetRequest(tickers.ticker)}>{tickers.ticker}</Button>
                     ))}
             </ButtonGroup>
                 <Card className = 'col-10 mx-auto m-5 p-2'>
-                    {focusStockStats.symbol !== undefined ? 
+                    {focus === false ? 
+                        <Card>
+                            <Card.Title className='text-primary'><h1>Welcome back to MoonViews, {loggedInUser.username}!</h1></Card.Title>
+                                <img src={Logo} alt='MoonViews logo' style={{width:'18rem'}} className='mx-auto'/>
+                                <Card.Body>
+                                    <Card.Text>
+                                        <h3 className='text-primary'>
+                                            Were happy to have you! <br/>
+                                            Lets get you caught up on your tracked stocks.<br/>
+                                            Click on the desired ticker above to catch up.
+                                        </h3>
+                                    </Card.Text>
+                                </Card.Body>
+                        </Card>
+                    : 
+                    (loaded === false ?
+                        (
+                        <>
+                            <h2 className='text-primary mx-auto'>Loading...</h2>
+                            <Spinner animation="border" variant="primary" className='mx-auto' size='xl'/>
+                        </>        
+                        ) :
                         <Card className="text-center mx-auto py-2 my-4" style={{width:'85%'}}>
                         <Card.Header>
                             <h3>{focusStockStats.price.shortName}</h3>
@@ -70,13 +97,8 @@ const UserWatchList = ({loggedInUser}) => {
                                     </div>
                                 </Card.Text>
                         </Card.Body>
-                    </Card> : 
-                        'click one'
-                        
-                        
-                        
-                        
-                        }
+                    </Card>
+                    )}
                 </Card>
         </div>
     )
