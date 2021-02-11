@@ -6,7 +6,7 @@ import FormLabel from 'react-bootstrap/FormLabel';
 import Button from 'react-bootstrap/Button';
 import {Link, navigate} from '@reach/router';
 
-const Login = () => {
+const Login = ({setLoggedinUser, loggedInUser, setIsSomeoneLoggedIn}) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -20,13 +20,22 @@ const Login = () => {
             withCredentials: true
             }
         )
-        .then (res => {
-            console.log('login succesful')
-            navigate('/');
+            .then (res => {
+                console.log('login succesful')
+                axios.get("http://localhost:8000/api/users/loggedin", {
+                    withCredentials: true
+                    })
+                    .then(res => {
+                        console.log(res);
+                        setLoggedinUser(res.data);
+                        setIsSomeoneLoggedIn(true);
+                    })
+                    .catch(err => console.log(err))
+                    navigate('/')
         })
-        .catch( err => {
-            console.log(err);
-        })
+            .catch( err => {
+                console.log(err);
+            })
     }
     return (
         <div className='p-3'>

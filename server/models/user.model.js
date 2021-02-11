@@ -4,7 +4,10 @@ const bcrypt = require("bcrypt");
 const UserTickersTrackedSchema = mongoose.Schema({
 	ticker:{
 		type: String,
-}});
+		minlength: [1, 'ticker must be at least 1 characters'],
+		maxlength: [4, 'ticker cannot exceed 4 characters']
+	},
+	},{timestamps:true});
 
 
 
@@ -43,9 +46,12 @@ UserSchema.pre("save" , function(next) {
 	.hash(this.password, 10)
 	.then(hash => {
 		this.password = hash;
+		console.log('the password was hashed')
 		next();
 	})
 });
+
+
 
 const User = mongoose.model("User", UserSchema);
 

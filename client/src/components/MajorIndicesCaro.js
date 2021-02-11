@@ -2,6 +2,7 @@ import react, {useEffect, useState} from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
+import Badge from 'react-bootstrap/Badge';
 import axios from 'axios';
 
 const MajorIndicesCaro = () => {
@@ -19,7 +20,9 @@ const MajorIndicesCaro = () => {
 
     return(
     <div className=' blue-bg p-2' id='summary'>
-        <h2 className='p-2 section-header text-light'>Market Summary</h2>
+        <Badge pill variant='light' className='d-block my-5 text-primary mx-auto text-center' style={{height:'3rem', width: '28rem'}}>
+                <h2>Market Summary</h2>
+        </Badge>
     {loaded !== false ? 
         (<Carousel className = 'my-3 row py-3'>
             {

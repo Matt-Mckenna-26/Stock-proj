@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import FormLabel from 'react-bootstrap/FormLabel';
 import Button from 'react-bootstrap/Button';
-import {Link} from "@reach/router";
+import {Link, navigate} from "@reach/router";
 
 const SignUp = () => {
 
@@ -24,6 +24,7 @@ const SignUp = () => {
         )
         .then (res => {
             console.log(res);
+            navigate('/login');
             setUsername("");
             setEmail("");
             setPassword("");

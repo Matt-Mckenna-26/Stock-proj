@@ -10,7 +10,7 @@ import {Link, navigate} from '@reach/router'
 
 
 
-const NaviHeader = ({ticker, setTicker, handleSubmit}) => {
+const NaviHeader = ({ticker, setTicker, handleSubmit, isSomeoneLoggedIn, logout}) => {
 
     return (
         <Navbar className='sticky-top w-100 border border-bottom-black' bg="white" expand="lg">
@@ -30,9 +30,10 @@ const NaviHeader = ({ticker, setTicker, handleSubmit}) => {
                 <Nav.Link href="/#summary" className='text-primary'>Summary</Nav.Link>
                 <Nav.Link href="/#trending" className='text-primary'>Trending</Nav.Link>
                 <Nav.Link href="/#search" className='text-primary'>Search</Nav.Link>
-                <Nav.Link href='/login' className='text-primary'>Login</Nav.Link>
-                <Nav.Link href='/register' className='text-primary'>Register</Nav.Link>
+                {isSomeoneLoggedIn === false ?<Nav.Link href='/login' className='text-primary'>Login</Nav.Link>: null}
+                {isSomeoneLoggedIn === false ?<Nav.Link href='/register' className='text-primary'>Register</Nav.Link> :null}
             </Nav>
+                {isSomeoneLoggedIn === false ? null : <Button className='align-self-right' onClick={logout}>Log Out</Button>}
                 <Form inline className='align-right bg-white navbar-link-font'>
                     <FormLabel className='px-2 text-primary'>Search:</FormLabel>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" defaultValue={ticker} onClick={(e)=> e.target.value =""} onChange={(e)=> setTicker(e.target.value)} />

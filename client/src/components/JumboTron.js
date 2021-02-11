@@ -7,7 +7,7 @@ import {Link} from '@reach/router'
 const JumboTron = ({searched}) => {
     return (
         <>
-        {searched === true? null :
+        {searched === true ? null :
     <Jumbotron className ='d-block w-90 mx-auto blue-bg' 
     style={{backgroundColor: '#659DBD', marginBottom: '0rem'}} id='home'>
             <h2 className='mb-3 jumbo-header-font text-light'>Welcome to MoonViews</h2>

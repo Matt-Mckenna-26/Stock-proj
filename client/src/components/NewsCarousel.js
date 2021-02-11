@@ -2,6 +2,7 @@ import react, {useEffect, useState} from 'react';
 import Carousel from 'react-bootstrap/Carousel'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
+import Badge from 'react-bootstrap/Badge'
 import axios from 'axios';
 
 const NewsCarousel = () => {
@@ -19,7 +20,9 @@ const NewsCarousel = () => {
 
     return(
     <div className='p-2 blue-bg' id='news'>
-        <h2 className='p-2 section-header text-white'>Headlines</h2>
+        <Badge pill variant='light' className='d-block my-5 text-primary mx-auto text-center' style={{height:'3rem', width: '35rem'}}>
+                <h2>Headlines</h2>
+        </Badge>
         {loaded !== false ? 
             (<Carousel className = 'py-3 row '>
                 {

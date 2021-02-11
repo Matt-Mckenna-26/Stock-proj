@@ -56,23 +56,31 @@ module.exports.getLoggedInUser = (req, res) => {
     .catch(err => res.status(400).json(err));
 }
 
-module.exports.updateUserWatchList = (req, res) => {
+module.exports.addToUserWatchList = (req, res) => {
   let userId =  req.params.userId
-  User.findOne({ _id: userId })
-  .then(user => {
-    if (user){
-      user.tickersTracked.push(req.body);
-      user.save({validateModifiedOnly: true});
-      res.send(user)
-    }else{
-      res.status(400).send({err: "user not found"})
-  }})
-  .catch(err => {
-    res.status(400).send({err: "user not found"})
-  })
+  User.findOneAndUpdate({_id: userId}, {$addToSet: {tickersTracked: req.body}}, {new: true, useFindAndModify:false, runValidators:true})
+    .then(newWatchList => {
+      res.send({newWatchList})
+      }
+    )
+    .catch( err => {
+      console.log(err)
+      res.status(401).json(err)
+    })
 };
 
-//two methods for logging out a user included 
+module.exports.removeTickerFromWatchList = (req, res) => {
+  let userId = req.params.userId
+  User.findOneAndUpdate({_id: userId},{$pull: {tickersTracked: req.body}}, {new:true, useFindAndModify:false})
+  .then(newWatchList => {
+    res.send({newWatchList})
+    }
+  )
+  .catch( err => {
+    console.log(err)
+    res.status(401).json(err)
+  })
+};
 
 module.exports.LogOut = (req, res) => {
   res

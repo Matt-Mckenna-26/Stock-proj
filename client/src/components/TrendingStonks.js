@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'
+import Badge from 'react-bootstrap/Badge'
 
 const TrendingStonks = () => {
     const [trendingStonks, setTrendingStonks] = useState([]);
@@ -38,7 +39,9 @@ const TrendingStonks = () => {
 
     return (
         <div className='p-3 border rounded-lg border-black bg-light col-10 mx-auto' id='trending'>
-            <h2 className='p-3 text-primary'> Trending at this Moment</h2>
+            <Badge pill variant='primary' className='d-block my-5 text-light mx-auto text-center' style={{height:'3rem', width: '28rem'}}>
+                <h2>Trending at this Moment</h2>
+            </Badge>
             <div>
                 <Button onClick ={(e) => sortByPercent(e)} variant='outline-primary m-2'>Sort by largest % Change</Button>
                 <Button onClick ={sortByDollar} variant='outline-primary m-2'>Sort by largest $ Change</Button>

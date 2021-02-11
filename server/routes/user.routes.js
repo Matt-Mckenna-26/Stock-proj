@@ -13,9 +13,8 @@ module.exports = app => {
   //routes that require auth include the *authenticate* method prior to calling the controller next
   app.get("/api/users/",authenticate, UserController.findAllUsers);
   app.get("/api/users/loggedin", authenticate, UserController.getLoggedInUser);
-  app.put("/api/addStockToWatchList/:userId", authenticate, UserController.updateUserWatchList);
-
-
+  app.put("/api/addStockToWatchList/:userId", authenticate, UserController.addToUserWatchList);
+  app.put("/api/removeStockWatchList/:userId", authenticate, UserController.removeTickerFromWatchList);
 
 
   app.get("/api/users/:id", UserController.findOneSingleUser);
