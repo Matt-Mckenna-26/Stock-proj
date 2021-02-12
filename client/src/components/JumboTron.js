@@ -22,7 +22,7 @@ const JumboTron = ({searched}) => {
                 <br/>
                 Want to dive deep into a specific asset/security? No problem, search above or click on the ticker for more info.
                 <br/>
-                Be sure to register below so you can pin stocks to your own personalized watchlist! 
+                Be sure to register below so you can pin stocks/ETF's to your own personalized watchlist! 
                 <br/>
                 What stocks are your ticket to the moon?
             </p>

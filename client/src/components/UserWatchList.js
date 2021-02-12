@@ -79,8 +79,8 @@ const UserWatchList = ({loggedInUser, setLoggedinUser}) => {
                         <Card className="text-center mx-auto my-4" style={{width:'85%'}}>
                         <Card.Header className = {`${focusStockStats.price.regularMarketChange.raw > 0 ? 'bg-success text-light' : 'bg-danger text-light'}`}>
                             <h3>{focusStockStats.price.shortName}</h3>
-                            <a className= 'mt-3 text-light' href={`${focusStockStats.summaryProfile.website}`} target='blank'>Website</a>
-                            <p><span className='font-weight-bold d-inline-block text-light mb-0'>Industry: </span>  {focusStockStats.summaryProfile.industry}</p>
+                            {focusStockStats.price.quoteType !== "ETF" ? <a className= 'mt-3 text-light' href={`${focusStockStats.summaryProfile.website}`} target='blank'>Website</a>: null}
+                            {focusStockStats.price.quoteType !== "ETF" ? <p><span className='font-weight-bold d-inline-block text-light mb-0'>Industry: </span>  {focusStockStats.summaryProfile.industry}</p>: null}
                             <p><span className='font-weight-bold d-inline-block text-light mb-0'>Symbol: </span>  {focusStockStats.price.symbol}</p>
                             <p><span className='font-weight-bold d-inline-block  text-light mb-0'>Exchange: </span>  {focusStockStats.price.exchangeName}</p>
                         </Card.Header>
@@ -112,7 +112,7 @@ const UserWatchList = ({loggedInUser, setLoggedinUser}) => {
                                             <li><span className='font-weight-bold'>Year Low:</span> ${focusStockStats.summaryDetail.fiftyTwoWeekLow.fmt}</li>
                                         </ul>
                                     </div>
-                                    <Button variant='outline-danger d-block mx-auto' onClick ={(e) => removeFromWatchlist(e, focusStockStats.price.symbol)}>Remove Stock from Watchlist</Button>
+                                    <Button variant='outline-danger d-block mx-auto' onClick ={(e) => removeFromWatchlist(e, focusStockStats.price.symbol)}>Remove from Watchlist</Button>
                                 </Card.Text>
                         </Card.Body>
                     </Card>
@@ -121,7 +121,5 @@ const UserWatchList = ({loggedInUser, setLoggedinUser}) => {
         </div>
     )
 }
-
-
 
 export default UserWatchList

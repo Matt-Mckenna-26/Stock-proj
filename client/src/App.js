@@ -7,6 +7,8 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 import {Router, navigate} from '@reach/router';
 import DashBoard from './views/DashBoard';
+import ErrorPage from './views/ErrorPage';
+import Footer from './components/Footer';
 
 const App = () => {
   const [loggedinUser, setLoggedinUser] = useState(undefined)
@@ -24,6 +26,8 @@ const logout = () => {
   )
     .then(res => {console.log(res)
       setIsSomeoneLoggedIn(false);
+      setSearched(false);
+      setLoaded(false);
     })
     .catch(console.log)
         navigate('/')
@@ -31,6 +35,7 @@ const logout = () => {
 
 const handleSubmit = (e) => {
     e.preventDefault();
+    setSearched(true);
     setLoaded(false);
     axios.get(`http://localhost:8000/api/stock/${ticker}`)
         .then(res => { 
@@ -38,23 +43,28 @@ const handleSubmit = (e) => {
           setDetailedStock(res.data)
           setLoaded(true);
         })
-        .catch(err => console.log({err}))
-          setSearched(true)
-          navigate('/');
+        .catch(err => {
+          console.log({err})
+          setSearched(false)
+          setLoaded(false)
+          navigate('/error')}
+          );
       }
 
   return (
-    <div className="App pb-5">
+    <div className="App">
       <NaviHeader ticker={ticker}  setTicker={setTicker} handleSubmit={handleSubmit} setSearch={setSearched}
       isSomeoneLoggedIn={isSomeoneLoggedIn} logout={logout}/>
-      <Router>
-          <DashBoard path ='/' ticker={ticker}  setTicker={setTicker} handleSubmit={handleSubmit} setSearch={setSearched} 
-          searched={searched} detailedStock ={detailedStock} loaded={loaded}
-          isSomeoneLoggedIn={isSomeoneLoggedIn} loggedInUser={loggedinUser} setLoggedinUser={setLoggedinUser}/>
-          <Login setIsSomeoneLoggedIn={setIsSomeoneLoggedIn} setLoggedinUser={setLoggedinUser} 
-          path='/login'/>
-          <SignUp path='/register'/>
-      </Router>
+        <Router>
+            <DashBoard path ='/' ticker={ticker}  setTicker={setTicker} handleSubmit={handleSubmit} setSearch={setSearched} 
+            searched={searched} detailedStock ={detailedStock} loaded={loaded}
+            isSomeoneLoggedIn={isSomeoneLoggedIn} loggedInUser={loggedinUser} setLoggedinUser={setLoggedinUser}/>
+            <ErrorPage path='/error'/>
+            <Login setIsSomeoneLoggedIn={setIsSomeoneLoggedIn} setLoggedinUser={setLoggedinUser} 
+            path='/login'/>
+            <SignUp path='/register'/>
+        </Router>
+      <Footer/>
     </div>
   );
 }

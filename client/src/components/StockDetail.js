@@ -27,18 +27,18 @@ const StockDetail = ({detailedStock, searched,  handleSubmit, setTicker, ticker,
                                 (<Card className="text-center mx-auto  my-4" style={{width:'85%'}}>
                                 <Card.Header className = {`${detailedStock.price.regularMarketChange.raw > 0 ? 'bg-success text-light' : 'bg-danger text-light'}`}>
                                     <h3>{detailedStock.price.shortName}</h3>
-                                    <a className= 'mt-3 text-light' href={`${detailedStock.summaryProfile.website}`} target='blank'>Website</a>
-                                    <p><span className='font-weight-bold d-inline-block text-light mb-0'>Industry: </span>  {detailedStock.summaryProfile.industry}</p>
+                                    {detailedStock.price.quoteType !== "ETF" ? <a className= 'mt-3 text-light' href={`${detailedStock.summaryProfile.website}`} target='blank'>Website</a>: null}
+                                    {detailedStock.price.quoteType !== "ETF" ? <p><span className='font-weight-bold d-inline-block text-light mb-0'>Industry: </span>  {detailedStock.summaryProfile.industry}</p>: null}
                                     <p><span className='font-weight-bold d-inline-block text-light mb-0'>Symbol: </span>  {detailedStock.price.symbol}</p>
                                     <p><span className='font-weight-bold d-inline-block  text-light mb-0'>Exchange: </span>  {detailedStock.price.exchangeName}</p>
-                                    {isSomeoneLoggedIn === true ?<Button variant='outline-light' onClick ={(e) => addToWatchList(e, detailedStock.price.symbol)}>Add Stock to your WatchList</Button> : null}
+                                    {isSomeoneLoggedIn === true ?<Button variant='outline-light' onClick ={(e) => addToWatchList(e, detailedStock.price.symbol)}>Add to your WatchList</Button> : null}
                                 </Card.Header>
                                 <Card.Body className = {`${detailedStock.price.regularMarketChange.raw > 0 ? ' border rounded border-success' : 'border rounded border-danger'}`}>
                                     <Card.Title>About {detailedStock.price.shortName}</Card.Title>
                                         <Card.Text>
-                                            <p>{detailedStock.summaryProfile.longBusinessSummary}</p>
+                                            {detailedStock.price.quoteType !== "ETF"? <p>{detailedStock.summaryProfile.longBusinessSummary}</p> : null}
                                         </Card.Text>
-                                        <Card.Title><h1>{detailedStock.price.symbol} Stock Information</h1></Card.Title>
+                                        <Card.Title><h1>{detailedStock.price.symbol} Information</h1></Card.Title>
                                         <Card.Text className='my-2 py-3'>
                                             <div className='mx-3' style ={{display:"inline-block"}}>
                                                 <ul className='list-unstyled'>
@@ -66,7 +66,7 @@ const StockDetail = ({detailedStock, searched,  handleSubmit, setTicker, ticker,
                                                 </ul>
                                             </div>
                                         </Card.Text>
-                                        <h2 className='mt-2 text-dark'>Search Another Stock.</h2>  
+                                        <h2 className='mt-2 text-dark'>Search Another Stock/ETF.</h2>  
                                             <Form inline-block className='align-right navbar-link-font p-2'>
                                                 <FormLabel className='px-2 text-dark font-weight-bold'>Enter ticker here:</FormLabel>
                                                 <FormControl type="text" placeholder="Search" className="col-lg-4 col-sm-10 mx-auto my-3" 
