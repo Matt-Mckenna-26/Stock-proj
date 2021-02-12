@@ -3,13 +3,19 @@ const app = express();
 const cors = require ("cors")
 const dotenv = require("dotenv")
 const cookieParser = require('cookie-parser');
+const mongoose =require("mongoose");
 
 dotenv.config();
 const PORT = process.env.PORT || 8000
 
 
 // This will fire our mongoose.connect statement to initialize our database connection
-require("./config/mongoose.config");
+mongoose.connect(process.env.MONGODB_URI || process.env.DB_NAME, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+})
+    .then(() => console.log(`Established a connection to the  database`))
+	.catch(err => console.log("Something went wrong when connecting to the database", err));
 
 app.use(express.json(), express.urlencoded({ extended: true }));
 app.use(cors({credentials: true, origin:'http://localhost:3000'}));
@@ -33,4 +39,4 @@ AllMyUserRoutes(app);
 AllMyStockRoutes(app);
 
 
-app.listen(PORT, () => console.log(`The server is running and listening on ${process.env.DB_PORT}`));
+app.listen(PORT, () => console.log(`The server is running and listening on ${process.env.PORT}`));
