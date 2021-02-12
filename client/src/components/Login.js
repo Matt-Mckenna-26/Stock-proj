@@ -4,9 +4,9 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import FormLabel from 'react-bootstrap/FormLabel';
 import Button from 'react-bootstrap/Button';
-import {Link, navigate} from '@reach/router';
+import { navigate } from '@reach/router';
 
-const Login = ({setLoggedinUser, loggedInUser, setIsSomeoneLoggedIn}) => {
+const Login = ({setLoggedinUser, setIsSomeoneLoggedIn}) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -29,9 +29,9 @@ const Login = ({setLoggedinUser, loggedInUser, setIsSomeoneLoggedIn}) => {
                         console.log(res);
                         setLoggedinUser(res.data);
                         setIsSomeoneLoggedIn(true);
+                        navigate('/')
                     })
                     .catch(err => console.log(err))
-                    navigate('/')
         })
             .catch( err => {
                 console.log(err);

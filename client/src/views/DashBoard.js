@@ -1,4 +1,4 @@
-import react, {useState, useEffect} from 'react'
+import React from 'react'
 import axios from 'axios';
 import JumboTron from '../components/JumboTron';
 import NewsCarousel from '../components/NewsCarousel';
@@ -7,17 +7,33 @@ import MajorIndicesCaro from '../components/MajorIndicesCaro';
 import StockDetail from '../components/StockDetail';
 import UserWatchList from '../components/UserWatchList';
 
-const DashBoard = ({searched, detailedStock, setDetailedStock, handleSubmit, setTicker, ticker, isSomeoneLoggedIn, loggedInUser}) => {
-    
+const DashBoard = ({searched, detailedStock, setDetailedStock, handleSubmit, setTicker, ticker, isSomeoneLoggedIn, loggedInUser, setLoggedinUser, loaded}) => {
+    const addToWatchList = (e, tickerSymbol) => {
+        e.preventDefault();
+        const newTicker =  tickerSymbol;
+        console.log(newTicker)
+        axios.put(`http://localhost:8000/api/addStockToWatchList/${loggedInUser._id}`, {ticker: newTicker}, 
+            {
+            withCredentials: true
+            }
+        ).then (res => {
+            console.log(res)
+            setLoggedinUser(res.data.newWatchList)
+        })
+                .catch(err => console.log(err))
+        .catch( err => {
+            console.log({err});
+        })
+    }
 
     return (
         <div>
-            {isSomeoneLoggedIn !== false ? <UserWatchList loggedInUser={loggedInUser}/> : <JumboTron searched={searched}/>}
-            {/* <StockDetail searched={searched} detailedStock={detailedStock} setDetailedStock={setDetailedStock} 
-            handleSubmit={handleSubmit} setTicker={setTicker} ticker={ticker}/> */}
-            {/* <MajorIndicesCaro/>
+            {isSomeoneLoggedIn !== false ? <UserWatchList loggedInUser={loggedInUser} setLoggedinUser={setLoggedinUser}/> : <JumboTron searched={searched}/>}
+            <StockDetail searched={searched} detailedStock={detailedStock} setDetailedStock={setDetailedStock} isSomeoneLoggedIn={isSomeoneLoggedIn}
+            handleSubmit={handleSubmit} setTicker={setTicker} ticker={ticker} loaded={loaded} addToWatchList={addToWatchList}/>
+            <MajorIndicesCaro/>
             <NewsCarousel />
-            <TrendingStonks/> */}
+            <TrendingStonks/>
         </div>
     );
 }

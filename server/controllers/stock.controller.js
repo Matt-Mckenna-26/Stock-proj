@@ -17,7 +17,7 @@ module.exports.FindAStock = (req, res) => {
                 res.json(response.data)
             })
             .catch(error => {
-                res.send.status(404).json(error)
+                res.status(404).send({error})
             });
 }
 
@@ -35,7 +35,7 @@ module.exports.GetMarketNews = (req, res) => {
             res.json(response.data)
         })
         .catch(error => {
-            res.send.status(404).json(error)
+            res.status(404).send({error})
         });
 }
 
@@ -53,7 +53,7 @@ module.exports.GetMarketSummary = (req, res) => {
             res.json(response.data)
         })
         .catch(error => {
-            res.send.status(404).json(error)
+            res.status(404).send({error})
         });
 }
 
@@ -72,7 +72,7 @@ module.exports.GetTrendingTickers = (req, res) => {
             res.json(response.data)
         })
         .catch(error => {
-            res.send.status(404).json(error)
+            res.status(404).send({error})
         });
 }
 
@@ -91,7 +91,7 @@ module.exports.GetMarketMovers = (req, res) => {
             res.json(response.data)
         })
         .catch(error => {
-            res.send.status(404).json(error)
+            res.status(404).send({error})
         });
 }
 

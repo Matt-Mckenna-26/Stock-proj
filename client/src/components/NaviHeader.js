@@ -1,4 +1,4 @@
-import react from 'react'
+import React from 'react'
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import FormLabel from 'react-bootstrap/esm/FormLabel';
 import Logo from '../images/MoonViewsLogo.png';
-import {Link, navigate} from '@reach/router'
+import {Link} from '@reach/router'
 
 
 
@@ -17,6 +17,7 @@ const NaviHeader = ({ticker, setTicker, handleSubmit, isSomeoneLoggedIn, logout}
             <Navbar.Brand href="#home">
                 <Link to='/'>
                     <img src={Logo}
+                    alt='Moonviews logo'
                     width ='75rem'
                     className='d-inline-block align-top mt-1 pt-1'
                     />

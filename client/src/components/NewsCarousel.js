@@ -1,4 +1,4 @@
-import react, {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Carousel from 'react-bootstrap/Carousel'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
@@ -30,7 +30,7 @@ const NewsCarousel = () => {
                     <Carousel.Item interval={4700} key={idx}>
                         <div className='d-block w-100 '>
                             {story.featuredMedia === null ? null :
-                            <img src={`${story.featuredMedia.url}`} style ={{height:'9rem'}}alt='Story Image'/>}
+                            <img src={`${story.featuredMedia.url}`} style ={{height:'9rem'}}alt={`media for ${story.shorterHeadline}`}/>}
                             <h4 className='text-light p-3'>{story.shorterHeadline}</h4>    
                             <a className='m-1' href={`${story.url}`} target='blank'>
                                 <Button variant='light' className='text-primary m-5'>Visit story</Button>

@@ -23,13 +23,11 @@ const SignUp = () => {
             }
         )
         .then (res => {
-            console.log(res);
             navigate('/login');
             setUsername("");
             setEmail("");
             setPassword("");
             setConfirmPassword("");
-            //set up navigation here 
         })
         .catch( err => {
             console.log(err);

@@ -1,6 +1,5 @@
-import react, {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import Badge from 'react-bootstrap/Badge';
 import Card from 'react-bootstrap/Card';
