@@ -1,0 +1,25 @@
+{
+  "name": "moon-views-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engine":{
+    "node":"14.15.0",
+    "npm": "6.14.8"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Matt-Mckenna-26/Stock-proj.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Matt-Mckenna-26/Stock-proj/issues"
+  },
+  "homepage": "https://github.com/Matt-Mckenna-26/Stock-proj#readme"
+}
