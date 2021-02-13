@@ -29,7 +29,7 @@ const TrendingStonks = () => {
     }
 
     useEffect(()=> {
-        axios.get('http://localhost:8000/api/trending/tickers')
+        axios.get('/api/trending/tickers')
         .then(res => { console.log(res.data.finance.result[0].quotes)
             setTrendingStonks(res.data.finance.result[0].quotes);
             setLoaded(true);

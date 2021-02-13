@@ -10,7 +10,7 @@ const MajorIndicesCaro = () => {
     const [loaded,setLoaded] = useState(false);
 
     useEffect(()=> {
-        axios.get('http://localhost:8000/api/market/summary')
+        axios.get('/api/market/summary')
         .then(res => { console.log(res.data)
             setIndices(res.data.MarketRegions.USA)
             setLoaded(true);

@@ -20,15 +20,11 @@ mongoose.connect(process.env.MONGODB_URI || connection, {
 	.catch(err => console.log("Something went wrong when connecting to the database", err));
 
 app.use(express.json(), express.urlencoded({ extended: true }));
-app.use(cors({credentials: true, origin:'*'}));
+app.use(cors({credentials: true, origin:true}));
 app.use(cookieParser());
-app.use(bodyParser.json());
 
-if (process.env.NODE_ENV ==="production") {
-    
-    app.use(express.static('../client/build'));
+app.use(express.static('../client/build'));
 
-}
 
 
 // This is where we import the users routes function from our user.routes.js file

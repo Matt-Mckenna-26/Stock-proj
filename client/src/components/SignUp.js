@@ -17,7 +17,7 @@ const SignUp = () => {
     const handleReg = (e) => {
         e.preventDefault();
         const newUser = {username:username, email:email, password:password, confirmPassword:confirmPassword};
-        axios.post("http://localhost:8000/api/register", newUser, 
+        axios.post("/api/register", newUser, 
             {
             withCredentials: true
             }
@@ -31,7 +31,7 @@ const SignUp = () => {
         })
         .catch( err => {
             console.log(err);
-            setErrors(err.response.data.errors);
+            // setErrors(err.response.data.errors);
         })
     }
     return (

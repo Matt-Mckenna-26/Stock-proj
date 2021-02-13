@@ -20,7 +20,7 @@ const App = () => {
 
 const logout = () => {
   axios.post(
-    "http://localhost:8000/api/logout",
+    "/api/logout",
     {},
     {withCredentials: true}
   )
@@ -37,7 +37,7 @@ const handleSubmit = (e) => {
     e.preventDefault();
     setSearched(true);
     setLoaded(false);
-    axios.get(`http://localhost:8000/api/stock/${ticker}`)
+    axios.get(`/api/stock/${ticker}`)
         .then(res => { 
           console.log(res.data)
           setDetailedStock(res.data)

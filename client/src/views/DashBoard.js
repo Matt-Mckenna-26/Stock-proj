@@ -12,7 +12,7 @@ const DashBoard = ({searched, detailedStock, setDetailedStock, handleSubmit, set
         e.preventDefault();
         const newTicker =  tickerSymbol;
         console.log(newTicker)
-        axios.put(`http://localhost:8000/api/addStockToWatchList/${loggedInUser._id}`, {ticker: newTicker}, 
+        axios.put(`/api/addStockToWatchList/${loggedInUser._id}`, {ticker: newTicker}, 
             {
             withCredentials: true
             }

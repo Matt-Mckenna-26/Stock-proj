@@ -10,7 +10,7 @@ const NewsCarousel = () => {
     const [loaded, setLoaded] = useState(false);
 
     useEffect(()=> {
-        axios.get('http://localhost:8000/api/market/news')
+        axios.get('/api/market/news')
         .then(res => { console.log(res.data.data.mostPopular.assets)
             setStories(res.data.data.mostPopular.assets);
             setLoaded(true);

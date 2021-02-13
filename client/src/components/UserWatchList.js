@@ -14,7 +14,7 @@ const UserWatchList = ({loggedInUser, setLoggedinUser}) => {
     const handleGetRequest = (thisTicker) => {
         setUserWatchListLoaded(false);
         setFocused(true);
-        axios.get(`http://localhost:8000/api/stock/${thisTicker}`)
+        axios.get(`/api/stock/${thisTicker}`)
             .then(res => { 
                 console.log(res.data);
                 setFocusStockStats(res.data);
