@@ -7,7 +7,7 @@ const mongoose =require("mongoose");
 
 
 dotenv.config();
-const PORT = process.env.PORT || 8000
+const port = process.env.PORT || 8000
 
 
 app.use(express.json(), express.urlencoded({ extended: true }));
@@ -38,4 +38,4 @@ mongoose.connect(process.env.MONGODB_URI || connection, {
 	.catch(err => console.log("Something went wrong when connecting to the database", err));
 
 
-app.listen(PORT, () => console.log(`The server is running and listening`));
+app.listen(port, () => console.log(`The server is running and listening`));

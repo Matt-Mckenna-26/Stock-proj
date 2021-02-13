@@ -2,11 +2,11 @@
   "name": "moon-views-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "install-client": "cd client && npm install",
-    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "start": "cd server && node server",
     "client": "cd client && npm start"
   },
