@@ -14,10 +14,11 @@ app.use(express.json(), express.urlencoded({ extended: true }));
 app.use(cors({credentials: true, origin:true}));
 app.use(cookieParser());
 
-if (process.env.NODE_ENV === 'productions'){
-
-
-	app.use(express.static('../client/build'));
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static("build"));
+	app.get("*", (req, res) => {
+		res.sendFile(path.resolve(__dirname,  "build", "index.html"));
+	});
 }
 
 // This is where we import the users routes function from our user.routes.js file
