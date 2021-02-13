@@ -4,7 +4,7 @@ const cors = require ("cors")
 const dotenv = require("dotenv")
 const cookieParser = require('cookie-parser');
 const mongoose =require("mongoose");
-const bodyParser = require('body-parser');
+
 
 dotenv.config();
 const PORT = process.env.PORT || 8000
@@ -34,4 +34,4 @@ AllMyUserRoutes(app);
 AllMyStockRoutes(app);
 
 
-app.listen(PORT, () => console.log(`The server is running and listening on ${process.env.PORT}`));
+app.listen(PORT, () => console.log(`The server is running and listening`));

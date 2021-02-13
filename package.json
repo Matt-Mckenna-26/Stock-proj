@@ -1,29 +1,28 @@
 {
-  "name": "moon-views-app",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.html",
-  "engine":{
-    "node":"14.15.0",
-    "npm": "6.14.8"
-  },
+  "main": "./server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build" : "cd client && npm run build",
+    "build": "cd client && npm run build",
     "install-client": "cd client && npm install",
-    "heroku-postbuild":"npm run install-client && npm run build",
-    "start":"node server/server.js",
-    "client":"cd client && npm start"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Matt-Mckenna-26/Stock-proj.git"
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "start": "node server/server.js",
+    "client": "cd client && npm start"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Matt-Mckenna-26/Stock-proj/issues"
-  },
-  "homepage": "https://github.com/Matt-Mckenna-26/Stock-proj#readme"
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.15"
+  }
 }
