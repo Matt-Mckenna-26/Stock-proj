@@ -7,11 +7,11 @@ const mongoose =require("mongoose");
 
 
 dotenv.config();
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 8000;
 
 
 app.use(express.json(), express.urlencoded({ extended: true }));
-app.use(cors({credentials: true, origin:true}));
+app.use(cors({credentials: true, origin:'https://moon-views-app.herokuapp.com'}));
 app.use(cookieParser());
 
 if (process.env.NODE_ENV === "production") {
