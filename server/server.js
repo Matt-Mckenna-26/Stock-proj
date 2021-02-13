@@ -1,3 +1,6 @@
+const http = require('http') ;
+const https = require('https');
+
 const express = require("express");
 const app = express();
 const cors = require ("cors")
@@ -7,11 +10,12 @@ const mongoose =require("mongoose");
 
 
 dotenv.config();
-const port = process.env.PORT || 8000;
+const httpport = process.env.PORT || 8000;
+const httpsport = process.env.PORT || 8080;
 
 
 app.use(express.json(), express.urlencoded({ extended: true }));
-app.use(cors({credentials: true, origin:'https://moon-views-app.herokuapp.com'}));
+app.use(cors({credentials: true, origin:true}));
 app.use(cookieParser());
 
 if (process.env.NODE_ENV === "production") {
@@ -38,4 +42,8 @@ mongoose.connect(process.env.MONGODB_URI || connection, {
 	.catch(err => console.log("Something went wrong when connecting to the database", err));
 
 
-app.listen(port, () => console.log(`The server is running and listening`));
+const httpServer = http.createServer(app);
+const httpsServer = https.createServer(app);	
+
+httpServer.listen(httpport, () => console.log(`The server is running and listening`));
+httpsServer.listen(httpsport, () => console.log(`The server is running and listening`));
