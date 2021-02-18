@@ -31,7 +31,7 @@ const AllMyStockRoutes = require("./routes/stock.routes")
 AllMyUserRoutes(app);
 AllMyStockRoutes(app);
 
-const connection = 'mongodb+srv://martimus:martimuspass@cluster0.ps40v.mongodb.net/cluster0?retryWrites=true&w=majority'
+const connection = 'database connection here'
 // This will fire our mongoose.connect statement to initialize our database connection
 mongoose.connect(process.env.MONGODB_URI || connection, {
 	useNewUrlParser: true,
