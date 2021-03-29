@@ -22,7 +22,7 @@ const Login = ({setLoggedinUser, setIsSomeoneLoggedIn}) => {
         )
             .then (res => {
                 console.log('login succesful')
-                axios.get("http://localhost:8000/api/users/loggedin", {
+                axios.get("/api/users/loggedin", {
                     withCredentials: true
                     })
                     .then(res => {
