@@ -11,7 +11,6 @@ const mongoose =require("mongoose");
 
 
 dotenv.config();
-const port = process.env.PORT || 8000;
 
 app.use(express.json(), express.urlencoded({ extended: true }));
 app.use(cors({credentials: true, origin:true}));
@@ -43,7 +42,7 @@ mongoose.connect(process.env.MONGODB_URI || connection, {
 	.catch(err => console.log("Something went wrong when connecting to the database", err));
 
 
-
+const port = process.env.PORT || 5000;
 const server = https.createServer(app);	
 
 server.listen(port, () => console.log(`The server is running and listening`));
