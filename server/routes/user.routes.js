@@ -15,10 +15,4 @@ module.exports = app => {
   app.get("/api/users/loggedin", authenticate, UserController.getLoggedInUser);
   app.put("/api/addStockToWatchList/:userId", authenticate, UserController.addToUserWatchList);
   app.put("/api/removeStockWatchList/:userId", authenticate, UserController.removeTickerFromWatchList);
-
-
-  app.get("/api/users/:id", UserController.findOneSingleUser);
-  app.put("/api/users/update/:id", UserController.updateExistingUser);
-  app.post("/api/users/new", UserController.createNewUser);
-  app.delete("/api/users/delete/:id", UserController.deleteAnExistingUser);
 };
