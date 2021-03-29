@@ -11,9 +11,7 @@ const mongoose =require("mongoose");
 
 
 dotenv.config();
-const httpport = process.env.PORT || 8000;
-const httpsport = process.env.PORT || 8080;
-
+const port = process.env.PORT || 8000;
 
 app.use(express.json(), express.urlencoded({ extended: true }));
 app.use(cors({credentials: true, origin:true}));
@@ -22,7 +20,8 @@ app.use(cookieParser());
 
 // This is where we import the users routes function from our user.routes.js file
 const AllMyUserRoutes = require("./routes/user.routes");
-const AllMyStockRoutes = require("./routes/stock.routes")
+const AllMyStockRoutes = require("./routes/stock.routes");
+const { prototype } = require('events');
 AllMyUserRoutes(app);
 AllMyStockRoutes(app);
 
@@ -44,8 +43,7 @@ mongoose.connect(process.env.MONGODB_URI || connection, {
 	.catch(err => console.log("Something went wrong when connecting to the database", err));
 
 
-const httpServer = http.createServer(app);
-const httpsServer = https.createServer(app);	
 
-httpServer.listen(httpport, () => console.log(`The server is running and listening`));
-httpsServer.listen(httpsport, () => console.log(`The server is running and listening`));
+const server = https.createServer(app);	
+
+server.listen(port, () => console.log(`The server is running and listening`));
