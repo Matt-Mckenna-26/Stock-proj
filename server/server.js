@@ -20,7 +20,6 @@ app.use(cookieParser());
 // This is where we import the users routes function from our user.routes.js file
 const AllMyUserRoutes = require("./routes/user.routes");
 const AllMyStockRoutes = require("./routes/stock.routes");
-const { prototype } = require('events');
 AllMyUserRoutes(app);
 AllMyStockRoutes(app);
 
